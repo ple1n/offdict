@@ -1,8 +1,8 @@
 use std::sync::Mutex;
 
 use anyhow::{anyhow, Result};
-use strprox::prefix::meta::Cache;
-use strprox::{MetaAutocompleter, TreeStringT};
+use metacomplete::prefix::meta::Cache;
+use metacomplete::{MetaAutocompleter, TreeStringT};
 use yoke::{Yoke, Yokeable};
 
 use crate::*;
