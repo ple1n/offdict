@@ -9,7 +9,9 @@
 use anyhow::bail;
 pub use anyhow::Result;
 
+#[cfg(feature="fst")]
 use fst_index::fstmmap;
+
 use owo_colors::OwoColorize;
 use rand::seq::SliceRandom;
 use rand::thread_rng;
@@ -30,7 +32,7 @@ use std::iter::FromIterator;
 use std::marker::PhantomData;
 use std::str::FromStr;
 use std::time::Duration;
-use std::{self, fs, vec};
+use std::{self, fs, process, vec};
 
 // use bson::{self, Array, Serializer};
 pub use std::cmp::min;
@@ -350,9 +352,9 @@ impl<Ix: Indexer> offdict<Ix> {
     }
 
     #[timed]
-    pub fn build_index_from_db(&mut self) -> Result<usize> {
+    pub fn build_index_from_db(&mut self, txt: bool) -> Result<usize> {
         let mut px = self.dirpath.clone();
-        px.push(Ix::FILE_NAME);
+        px.push(if txt { "words.txt" } else { Ix::FILE_NAME });
 
         let mut set: BTreeSet<String> = BTreeSet::new();
         for res in self
@@ -373,8 +375,15 @@ impl<Ix: Indexer> offdict<Ix> {
         let mut sorted: Vec<String> = set.into_iter().collect();
         sorted.sort();
 
-        Ix::build_all(sorted, &px)?;
-        self.set = Some(Ix::load_file(&px)?);
+        if txt {
+            let k = sorted.join("\n");
+            File::create(&px)?.write_all(k.as_bytes())?;
+            println!("written to {:?}", &px);
+            process::exit(0);
+        } else {
+            Ix::build_all(sorted, &px)?;
+            self.set = Some(Ix::load_file(&px)?);
+        }
 
         Ok(c)
     }
@@ -596,7 +605,11 @@ pub enum Commands {
     // },
     reset {},
     #[command(about = "Build index, required after adding or removing words")]
-    build {},
+    build {
+        /// Don't build an index. Instead, export all entries into a txt
+        #[arg(short = 'e')]
+        export: bool,
+    },
     #[command(about = "Benchmark")]
     bench {
         #[arg(short, long)]
@@ -659,8 +672,8 @@ where
             println!("reset.");
             Ok(false)
         }
-        Some(Commands::build {}) => {
-            let c = db()?.build_index_from_db()?;
+        Some(Commands::build { export }) => {
+            let c = db()?.build_index_from_db(export)?;
             println!("built, {} words", c);
             Ok(true)
         }
