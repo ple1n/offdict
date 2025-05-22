@@ -41,7 +41,6 @@ I personally have some Chinese-English dictionary source files. I cleaned up the
 
 ## Known issues
 
-- It may return suboptimal results due to inferior algorithms while I'm trading for speed over accuracy. Better algorithms only exist on papers or are commercial at the time of implementing. 
 - IBus seems to write into the PRIMARY of X11 (when I am using Wayland), which was intended to be user selection
 - Wayland can't set window on top https://github.com/tauri-apps/tauri/issues/3117 You have to set it manually (temporarily or permanently through system settings)
 - Wayland global shortcut https://github.com/tauri-apps/tauri/issues/3578
@@ -61,7 +60,7 @@ For now GDK_BACKEND=x11 is set by hardcode
 - Complete support for 'lookup by copy' and 'lookup by selection'
     - Wayland. Upstream dependecies are not yet working
     - https://github.com/bugaevc/wl-clipboard works
-- Lookup by cursor pointing ?
+- Lookup by cursor pointing?
     - Embed it in other applications 
 
 
