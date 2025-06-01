@@ -6,6 +6,7 @@ Totally offline performant dictionary, with prefix fuzzy autocompleting search, 
 
 <img src="./img/screenshot.png" width="50%"><img src="./img/screenshot-dark.png" width="50%">
 
+Obtain dictionary from https://ipfs.io/ipfs/QmQP6BiPnwvYGuPGXKm4frRFSubA5jrwHXR9VeydvLwV25/ 74MB, continaing English <-> Chinese and classical Chinese terms, totalling 1.5M.
 
 ## Usage
 
