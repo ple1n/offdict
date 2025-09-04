@@ -92,3 +92,7 @@ For now GDK_BACKEND=x11 is set by hardcode
 │ 1 │ /home/---/offdict/data/strprox  │ 213.4 MB │ 213.4 MB │
 ╰───┴─────────────────────────────────┴──────────┴──────────╯
 ```
+
+## Wayland Update
+
+Required packages, `extra/webkit2gtk-4.1`

@@ -3,7 +3,6 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-use clipboard_master::{CallbackResult, ClipboardHandler, Master};
 
 use gdkx11::gdk::{ffi::GDK_CURRENT_TIME, ModifierType};
 use gtk::{
