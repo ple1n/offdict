@@ -1,0 +1,1 @@
+cp ./target/release/offdict-tauri /usr/bin/

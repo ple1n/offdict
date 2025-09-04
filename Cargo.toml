@@ -5,3 +5,7 @@ exclude = ["strprox"]
 [profile.release]
 strip = true
 lto = true
+panic = "abort"
+
+[profile.dev]
+panic = "abort"

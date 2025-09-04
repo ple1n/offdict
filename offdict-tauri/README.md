@@ -10,3 +10,8 @@ This template should help get you started developing with Tauri, Svelte and Type
 ## Building
 
 https://tauri.app/v1/guides/getting-started/prerequisites/
+
+```sh
+npm i
+npm run build
+```

@@ -33,6 +33,10 @@ git clone --recurse-submodules <url>
 apt install libxcb-shape0-dev libxcb-xfixes0-dev # required for building clipboard-master
 ```
 
+Dependencies I found on a clean Arch install
+
+`pacman -S libsoup webkit2gtk clang`
+
 - Format I camp up with deliberately when cleaning up some dictionary files
     - [x] API server
     - [x] REPL
