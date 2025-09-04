@@ -12,7 +12,7 @@ Obtain dictionary from https://ipfs.io/ipfs/QmQP6BiPnwvYGuPGXKm4frRFSubA5jrwHXR9
 
 - To import dictionaries 
     1. Just grab a `data` folder from somewhere (might have vulnerability)
-    2. or, ⚠️**import with 🅰️`./offdict yaml -p '*.yaml'`** ⚠️(supports wildcard `*`) 
+    2. or, extract the compressed archive, and ⚠️**import with 🅰️`./offdict yaml -p '*.yaml'`** ⚠️(supports wildcard `*`) 
     3. ⚠️**Then build the index 🅱️`./offdict build`** ⚠️
 - Input anywhere to start live search.
 - Copy/select anything to look up.
@@ -23,6 +23,8 @@ Obtain dictionary from https://ipfs.io/ipfs/QmQP6BiPnwvYGuPGXKm4frRFSubA5jrwHXR9
 - It loads `config.json5` in the working directory. [example file](config.json5)
 - Install [userscript](./offdict-userscript.js) that monitors selection in browsers
     - You have to set the IP of Offdict by changing a variable.
+
+`./offdict yaml -p '*.yaml` sometimes fails due to variance in shells. Try using absolute path and double quote it.
 
 API: 
 - `127.0.0.1:3030/q/some_word_to_lookup`
@@ -72,3 +74,21 @@ For now GDK_BACKEND=x11 is set by hardcode
 ## Notes 
 
 - `cargo tauri build -d -b none`
+
+## Tests and build runs
+
+- I built this on a fresh Arch install on 2025.9.5
+    - Rocksdb had to be upgraded to 0.24 to fix a build error
+    - Absolute path spec and double quote had to be used, in nushell
+    - Frontend, backend, and database were built, `Entries in database, 1618336.`
+    - Again, after importing dictionaries, run `offdict-tauri build`
+
+```
+~/offdict> du data/*
+╭───┬─────────────────────────────────┬──────────┬──────────╮
+│ # │              path               │ apparent │ physical │
+├───┼─────────────────────────────────┼──────────┼──────────┤
+│ 0 │ /home/---/offdict/data/dicts.db │ 257.4 MB │ 257.5 MB │
+│ 1 │ /home/---/offdict/data/strprox  │ 213.4 MB │ 213.4 MB │
+╰───┴─────────────────────────────────┴──────────┴──────────╯
+```

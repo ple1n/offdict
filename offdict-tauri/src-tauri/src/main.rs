@@ -1,3 +1,4 @@
+#![allow(warnings)]
 #![cfg_attr(
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
@@ -269,15 +270,15 @@ fn input_header(win: Window) -> HeaderBar {
     });
     en.connect_changed(|e| {
         dbg!(e.text());
-        on_input(e.text().to_string(), false);
+        let _ = on_input(e.text().to_string(), false);
     });
     en.connect_key_press_event(move |e, k| {
         if k.keyval() == gdk::keys::constants::Return {
             println!("expensive search");
-            on_input(e.text().to_string(), true);
+            let _ = on_input(e.text().to_string(), true);
         } else if k.keyval() == gdk::keys::constants::Escape {
-            save_pos(&win);
-            win.minimize().unwrap();
+            // save_pos(&win);
+            // win.minimize().unwrap();
         }
         Inhibit::default()
     });
