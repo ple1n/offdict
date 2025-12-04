@@ -1,6 +1,16 @@
+#### Check https://github.com/ple1n/hoverpanel for latest version
+
+```
+⚠️⚠️
+⚠️
+⚠️⚠️⚠️⚠️⚠️
+```
+
 ## Offline dictionary with open formats
 
 Totally offline performant dictionary, with prefix fuzzy autocompleting search, live, and clipboard watching (lookup by selection on Linux).
+
+
 
 - Linux only, currently
 
